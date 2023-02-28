@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
-import 'package:food_app/screens/home_screen/home_screen.dart';
+import 'package:food_app/screens/home/home_screen.dart';
+import 'package:food_app/screens/product_overview/product_overview.dart';
 
 void main() {
   // await FirebaseAuth.instance;
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: ProductOverview(),
     );
   }
 }
