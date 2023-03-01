@@ -4,6 +4,7 @@ import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/screens/home/home_screen.dart';
 import 'package:food_app/screens/my_profile/my_profile.dart';
 import 'package:food_app/screens/product_overview/product_overview.dart';
+import 'package:food_app/screens/search/search.dart';
 
 void main() {
   // await FirebaseAuth.instance;
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyProfile(),
+      home: Search(),
     );
   }
 }

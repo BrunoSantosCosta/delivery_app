@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:food_app/screens/home/drawe_tiler.dart';
 import 'package:food_app/screens/home/singal_product.dart';
 import 'package:food_app/screens/product_overview/product_overview.dart';
+import 'package:food_app/screens/search/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,13 +30,19 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 17,
           ),
         ),
-        actions: const [
+        actions: [
           CircleAvatar(
-            radius: 12,
+            radius: 20,
             backgroundColor: Color(0xffd4d181),
-            child: Icon(
-              Icons.search,
-              size: 17,
+            child: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(),
+                  ),
+                );
+              },
               color: Colors.black,
             ),
           ),
