@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/screens/home/home_screen.dart';
+import 'package:food_app/screens/my_profile/my_profile.dart';
 import 'package:food_app/screens/product_overview/product_overview.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProductOverview(),
+      home: MyProfile(),
     );
   }
 }

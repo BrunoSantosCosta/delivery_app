@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/screens/home/home_screen.dart';
+import 'package:food_app/screens/my_profile/my_profile.dart';
 
 class DrawerTile extends StatelessWidget {
   const DrawerTile({super.key});
@@ -50,9 +51,21 @@ class DrawerTile extends StatelessWidget {
             ),
             listTile(icon: Icons.home_outlined, title: 'Home'),
             listTile(icon: Icons.shop_outlined, title: 'Review Cart'),
-            listTile(icon: Icons.person_outline, title: 'My Profile'),
+            listTile(
+              icon: Icons.person_outline,
+              title: 'My Profile',
+            ),
             listTile(icon: Icons.notifications_outlined, title: 'Notification'),
-            listTile(icon: Icons.star_outline, title: 'Rating & Review'),
+            listTile(
+                icon: Icons.star_outline,
+                title: 'Rating & Review',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MyProfile(),
+                    ),
+                  );
+                }),
             listTile(icon: Icons.favorite_outline, title: 'Wishlist'),
             listTile(icon: Icons.copy_all_outlined, title: 'Raise a comlaint'),
             listTile(icon: Icons.format_quote_outlined, title: 'FAQs'),
@@ -91,7 +104,8 @@ class DrawerTile extends StatelessWidget {
     );
   }
 
-  Widget listTile({required IconData icon, required String title}) {
+  Widget listTile(
+      {required IconData icon, required String title, VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(
         icon,
