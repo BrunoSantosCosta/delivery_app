@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class SingalProduct extends StatelessWidget {
+class SingalProduct extends StatefulWidget {
   final String productImage;
   final String productName;
+  final int productPrice;
   final VoidCallback onTap;
   const SingalProduct({
     super.key,
     required this.productImage,
     required this.productName,
     required this.onTap,
+    required this.productPrice,
   });
+  @override
+  _SingalProductState createState() => _SingalProductState();
+}
 
+class _SingalProductState extends State<SingalProduct> {
   @override
   Widget build(BuildContext context) {
-    return singalProducts();
-  }
-
-  Container singalProducts() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 230,
@@ -30,19 +32,13 @@ class SingalProduct extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Expanded(
-          //   flex: 2,
-          //   child: Image.network(
-          //       fit: BoxFit.cover,
-          //       'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg'),
-          // ),
           GestureDetector(
-            onTap: onTap,
+            onTap: widget.onTap,
             child: Container(
               height: 150,
               padding: EdgeInsets.all(5),
               width: double.infinity,
-              child: Image.network(productImage),
+              child: Image.network(widget.productImage),
             ),
           ),
           Expanded(

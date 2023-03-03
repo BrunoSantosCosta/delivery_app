@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:food_app/providers/product_provider.dart';
 import 'package:food_app/screens/home/drawe_tiler.dart';
 import 'package:food_app/screens/home/singal_product.dart';
 import 'package:food_app/screens/product_overview/product_overview.dart';
 import 'package:food_app/screens/search/search.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +16,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late ProductProvider productProvider;
+  @override
+  void initState() {
+    ProductProvider productProvider = Provider.of(
+      context,
+      listen: false,
+    );
+    productProvider.fatchHerbProductData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    productProvider = Provider.of(context);
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       drawer: DrawerTile(),
@@ -46,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 5),
             child: CircleAvatar(
               radius: 12,
@@ -160,50 +174,51 @@ class _HomeScreenState extends State<HomeScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      SingalProduct(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ProductOverview(),
-                            ),
-                          );
-                        },
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                    ],
+                    children: productProvider.getHerbProductDataList.map(
+                      (herbsProductData) {
+                        return SingalProduct(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ProductOverview(
+                                  productImage: herbsProductData.productImage
+                                          .toString() ??
+                                      '',
+                                  productName:
+                                      herbsProductData.productName.toString() ??
+                                          '',
+                                  productPrice: int.parse(herbsProductData
+                                          .productPrice
+                                          .toString() ??
+                                      ''),
+                                ),
+                              ),
+                            );
+                          },
+                          productImage:
+                              herbsProductData.productImage.toString() ?? '',
+                          productName:
+                              herbsProductData.productName.toString() ?? '',
+                          productPrice: int.parse(
+                              herbsProductData.productPrice.toString() ?? ''),
+                        );
+                      },
+                    ).toList(),
+
+                    // children: [
+                    //   SingalProduct(
+                    //     onTap: () {
+                    //       Navigator.of(context).push(
+                    //         MaterialPageRoute(
+                    //           builder: (context) => ProductOverview(),
+                    //         ),
+                    //       );
+                    //     },
+                    //     productImage:
+                    //         'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                    //     productName: 'Herbs Seadonings',
+                    //   ),
+                    // ],
                   ),
                 ),
                 Padding(
@@ -219,49 +234,49 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                      SingalProduct(
-                        onTap: () {},
-                        productImage:
-                            'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
-                        productName: 'Herbs Seadonings',
-                      ),
-                    ],
-                  ),
-                ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //       SingalProduct(
+                //         onTap: () {},
+                //         productImage:
+                //             'https://thumbs.dreamstime.com/b/fresh-fruits-vegetables-berries-black-background-banner-top-view-free-space-your-text-164647327.jpg',
+                //         productName: 'Herbs Seadonings',
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ],
