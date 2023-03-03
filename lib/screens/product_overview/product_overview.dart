@@ -5,7 +5,15 @@ import 'package:flutter/src/widgets/placeholder.dart';
 enum SinginCharacter { fill, outline }
 
 class ProductOverview extends StatefulWidget {
-  const ProductOverview({super.key});
+  final String productName;
+  final String productImage;
+  final int productPrice;
+  const ProductOverview({
+    super.key,
+    required this.productName,
+    required this.productImage,
+    required this.productPrice,
+  });
 
   @override
   State<ProductOverview> createState() => _ProductOverviewState();
@@ -83,7 +91,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 children: [
                   ListTile(
                     title: Text('Fresh Basil'),
-                    subtitle: Text('\$50'),
+                    subtitle: Text('\$${widget.productPrice}'),
                   ),
                   Container(
                     height: 250,
